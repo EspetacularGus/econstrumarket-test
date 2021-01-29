@@ -4,6 +4,11 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { VirtualTimeScheduler } from 'rxjs';
 import { ClimateProvider } from 'src/providers/climate';
+import { faCloudRain } from '@fortawesome/free-solid-svg-icons';
+import { faCloudShowersHeavy } from '@fortawesome/free-solid-svg-icons';
+import { faCloud } from '@fortawesome/free-solid-svg-icons';
+import { faCloudSun } from '@fortawesome/free-solid-svg-icons';
+import { faSun } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-climate',
@@ -15,10 +20,19 @@ export class ClimateComponent implements OnInit {
   public position = -2;
   public firstDay = 0;
   public lastDay = 6;
+  
+  public minTemp = 0;
+  public maxTemp = 0;
 
   private climateInfo: any;
   public forecast = [];
   public forecastDays = [];
+
+  public faCloudRain = faCloudRain;
+  public faCloud = faCloud;
+  public faCloudShowersHeavy = faCloudShowersHeavy;
+  public faCloudSun = faCloudSun;
+  public faSun = faSun;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -30,6 +44,12 @@ export class ClimateComponent implements OnInit {
       this.climateInfo = res
       this.forecastDays = this.climateInfo.results.forecast
       this.sliceForecast()
+
+      const temperatures = [];
+      this.forecastDays.map(x => { temperatures.push(x.min, x.max) })
+      temperatures.sort();
+      this.minTemp = temperatures[0];
+      this.maxTemp = temperatures[temperatures.length - 1]
     }).catch(err => {
       console.log("ERR: ", err)
       this.openSnackBar('Ocorreu um erro ao buscar os dados climáticos. Por favor, tente novamente mais tarde', "FECHAR")

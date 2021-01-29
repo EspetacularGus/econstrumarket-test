@@ -1,14 +1,40 @@
-@import "../../theme/global.scss";
-
-.form {
-    margin-bottom: 15px;
+h1,
+h2,
+h3,
+h4 {
+    margin-bottom: 5px;
 }
 
-.search {
-    align-items: center;
-}
-
-::ng-deep .map-container {
-    margin-top: 20px;
+.weather {
+    margin-bottom: 10px;
     border-radius: 10px;
+    padding: 10px;
+    background-color: #fffad39a;
+    border: solid 1px rgb(0, 0, 0, 0.1);
+}
+
+.storm {
+    background-color: #9cb8ed67;
+}
+
+.cloud {
+    background-color: #d9f5ea95;
+}
+
+.cloudly-day {
+    background-color: #fffad39a;
+}
+
+.rain {
+    background-color: #b3c8ee62;
+}
+
+.flex {
+    display: flex;
+}
+
+@media (max-width: 720px) {
+    .limit {
+        width: 100% !important;
+    }
 }

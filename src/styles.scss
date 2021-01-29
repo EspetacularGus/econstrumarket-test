@@ -1,8 +1,15 @@
 // ----------------- Import das folhas de estilo necessárias --------------------
 
 @import '~@angular/material/theming';
-@import '~bootstrap/dist/css/bootstrap.min.css';
-@import "./theme/global.scss";
+@import "~bootswatch/dist/lux/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/lux/bootswatch";
+
+$main_purple: #4f52e5;
+$font_purple: #2b2d92;
+$main_red: #fa063a;
+$btn_green: #51d7a1;
+$bg_white: #f8f9fe;
 
 html, body { height: 100%; background-color: $bg_white; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

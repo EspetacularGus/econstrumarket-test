@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClimateComponent } from './climate/climate.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ClimateComponent } from './climate/climate.component';
     MatIconModule,
     MatSelectModule,
     MatSnackBarModule,
+    FontAwesomeModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.circle,
       backdropBackgroundColour: 'rgba(255,255,255,0.3)',
@@ -43,6 +45,7 @@ import { ClimateComponent } from './climate/climate.component';
       secondaryColour: '#645cfb',
       tertiaryColour: '#ffffff'
     }),
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
