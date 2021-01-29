@@ -1,0 +1,8 @@
+// ----------------- Import das folhas de estilo necessárias --------------------
+
+@import '~@angular/material/theming';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "./theme/global.scss";
+
+html, body { height: 100%; background-color: $bg_white; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

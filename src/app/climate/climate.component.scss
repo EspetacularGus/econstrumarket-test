@@ -1,0 +1,14 @@
+@import "../../theme/global.scss";
+
+.form {
+    margin-bottom: 15px;
+}
+
+.search {
+    align-items: center;
+}
+
+::ng-deep .map-container {
+    margin-top: 20px;
+    border-radius: 10px;
+}
