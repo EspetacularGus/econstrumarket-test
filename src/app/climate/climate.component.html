@@ -4,15 +4,18 @@
         <mat-card class="mat-elevation-z0">
             <div class="row">
                 <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 form">
-                    <h3>Filtrar por</h3>
+                    <h3>Filtrar por:</h3>
                     <div class="col-xs-10">
                         <mat-form-field appearance="outline">
                             <mat-label><small>Dia da Semana</small></mat-label>
-                            <mat-select [(ngModel)]="position" [formControl]="company">
+                            <mat-select [(ngModel)]="position" (selectionChange)="changeWeekDay()">
                                 <mat-option [value]="-1">
-                                    Todos
+                                    Todos os dias
                                 </mat-option>
-                                <ng-container *ngFor="let for of forecast; index as i">
+                                <mat-option [value]="-2">
+                                    Toda a semana
+                                </mat-option>
+                                <ng-container *ngFor="let for of forecastDays; index as i">
                                     <mat-option [value]="i">
                                         {{ for.date }} - {{ for.weekday }}
                                     </mat-option>
@@ -22,12 +25,12 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 form">
-                    <h3>Intervalo</h3>
+                    <h3>Intervalo:</h3>
                     <div class="col-xs-12">
                         <mat-form-field appearance="outline">
                             <mat-label><small>Primeiro Dia</small></mat-label>
-                            <mat-select [(ngModel)]="position" [formControl]="company">
-                                <ng-container *ngFor="let for of forecast; index as i">
+                            <mat-select [(ngModel)]="firstDay" (selectionChange)="sliceForecast()">
+                                <ng-container *ngFor="let for of forecastDays; index as i">
                                     <mat-option [value]="i">
                                         {{ for.date }} - {{ for.weekday }}
                                     </mat-option>
@@ -37,8 +40,8 @@
                         até
                         <mat-form-field appearance="outline">
                             <mat-label><small>Último Dia</small></mat-label>
-                            <mat-select [(ngModel)]="position" [formControl]="company">
-                                <ng-container *ngFor="let for of forecast; index as i">
+                            <mat-select [(ngModel)]="lastDay" (selectionChange)="sliceForecast()">
+                                <ng-container *ngFor="let for of forecastDays; index as i">
                                     <mat-option [value]="i">
                                         {{ for.date }} - {{ for.weekday }}
                                     </mat-option>
@@ -48,8 +51,8 @@
                     </div>
                 </div>
                 <div *ngIf="position >= 0">
-                    Min: {{ forecast[position].min }}ºC Max: {{ forecast[position].max }}ºC
-                    {{ forecast[position].date }} - {{ forecast[position].weekday }}: {{ forecast[position].description }}
+                    Min: {{ forecastDays[position].min }}ºC Max: {{ forecastDays[position].max }}ºC
+                    {{ forecastDays[position].date }} - {{ forecastDays[position].weekday }}: {{ forecastDays[position].description }}
                 </div>
                 <div *ngIf="position < 0">
                     <div *ngFor="let for of forecast" class="col-lg-4 col-md-6 col-sm-12 col-xs-12">

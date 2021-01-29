@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   loading: false,
-  API_URL: 'https://api.hgbrasil.com'
+  API_URL: 'https://api.hgbrasil.com',
+  API_KEY: '00a46f3e'
 };
 
 /*

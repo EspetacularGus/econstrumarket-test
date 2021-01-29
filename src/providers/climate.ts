@@ -12,7 +12,7 @@ export class ClimateProvider {
 
 	getClimateInfo() {
 		return new Promise((resolve, reject) => {
-			this.http.get('weather?woeid=455827&key=00a46f3e&format=json-cors')
+			this.http.get('weather?woeid=455827&format=json-cors')
 			.then(res => {
 				resolve(res);
 			}).catch(err => { 

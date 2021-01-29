@@ -12,22 +12,13 @@ import { ClimateProvider } from 'src/providers/climate';
 })
 export class ClimateComponent implements OnInit {
 
-  public name = new FormControl('', [Validators.required]);
-  public company = new FormControl('', [Validators.required]);
-  public latitude = new FormControl('', [Validators.required]);
-  public longitude = new FormControl('', [Validators.required]);
-
-  public managers = []
-  public operators = []
-  public vehicles = []
-  public position = -1;
+  public position = -2;
+  public firstDay = 0;
+  public lastDay = 6;
 
   private climateInfo: any;
-  public forecast: any;
-  public inputVehicle: any
-  public inputOperator: any;
-  public inputManager: any;
-  public marker: any
+  public forecast = [];
+  public forecastDays = [];
 
   constructor(
     private snackBar: MatSnackBar,
@@ -35,46 +26,37 @@ export class ClimateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
     this.climateProvider.getClimateInfo().then(res => {
-
       this.climateInfo = res
-      this.forecast = this.climateInfo.results.forecast
-      console.log(this.forecast)
+      this.forecastDays = this.climateInfo.results.forecast
+      this.sliceForecast()
     }).catch(err => {
       console.log("ERR: ", err)
-      this.openSnackBar('Ocorreu um erro ao buscar os dados das empresas. Por favor, tente novamente mais tarde', "FECHAR")
+      this.openSnackBar('Ocorreu um erro ao buscar os dados climáticos. Por favor, tente novamente mais tarde', "FECHAR")
     })
   }
 
-  onSubmit() {
-  
+  sliceForecast(keep?) {
+    if (!keep) this.position = -3
+    this.forecast = this.forecastDays.slice(this.firstDay, this.lastDay + 1)
   }
 
-  validateFields() {
-    if (!this.name.valid) {
-      this.name.markAsTouched()
-      return this.openSnackBar('O campo "Nome" é obrigatório!', 'OK')
-    } else if (!this.company.valid) {
-      this.company.markAsTouched()
-      return this.openSnackBar('O campo "Empresa" é obrigatório!', 'OK')
-    } else if (!this.latitude.valid) {
-      this.latitude.markAsTouched()
-      return this.openSnackBar('O campo "Latitude" é obrigatório!', 'OK')
-    } else if (!this.longitude.valid) {
-      this.longitude.markAsTouched()
-      return this.openSnackBar('O campo "Longitude" é obrigatório!', 'OK')
-    } else {
-      return true
+  changeWeekDay() {
+    switch (this.position) {
+      case -1:
+        this.firstDay = 0;
+        this.lastDay = 9;
+        break;
+      case -2:
+        this.firstDay = 0;
+        this.lastDay = 6;
+        break;
+      default:
+        this.firstDay = this.position;
+        this.lastDay = this.position;
+        break;
     }
-  }
-
-  clearFields() {
-    this.vehicles = []
-    this.managers = []
-    this.operators = []
-    this.name.reset()
-    this.company.reset()
+    this.sliceForecast(true);
   }
 
   openSnackBar(message: string, action: string) {

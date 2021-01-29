@@ -1,6 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { environment } from '../environments/environment';
 
 @Injectable({
@@ -14,7 +13,6 @@ export class HttpService {
 
 	constructor(
 		private http: HttpClient,
-		private router: Router,
 	) { }
 
 
@@ -29,7 +27,9 @@ export class HttpService {
 	request(path: string, method: string,  data: any): any {
 
 		let url: string = String(environment.API_URL);
-		if (path && path !== null) url = String(environment.API_URL) + '/' + path
+		if (path && path !== null) {
+			url = String(environment.API_URL) + '/' + path + '&key=' + environment.API_KEY
+		}
 
 		const headers: any = {};
 		headers['Content-Type'] = 'application/json;';
