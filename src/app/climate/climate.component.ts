@@ -39,7 +39,7 @@ export class ClimateComponent implements OnInit {
     private climateProvider: ClimateProvider
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.climateProvider.getClimateInfo().then(res => {
       this.climateInfo = res
       this.forecastDays = this.climateInfo.results.forecast
@@ -56,12 +56,12 @@ export class ClimateComponent implements OnInit {
     })
   }
 
-  sliceForecast(keep?) {
+  public sliceForecast(keep?) {
     if (!keep) this.position = -3
     this.forecast = this.forecastDays.slice(this.firstDay, this.lastDay + 1)
   }
 
-  changeWeekDay() {
+  public changeWeekDay() {
     switch (this.position) {
       case -1:
         this.firstDay = 0;
@@ -79,7 +79,7 @@ export class ClimateComponent implements OnInit {
     this.sliceForecast(true);
   }
 
-  openSnackBar(message: string, action: string) {
+  private openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 5000,
       verticalPosition: 'top'

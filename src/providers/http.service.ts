@@ -16,15 +16,15 @@ export class HttpService {
 	) { }
 
 
-	get(path: string): any {
+	public get(path: string): any {
 		return this.request(path, 'get', {});
 	}
 
-	post(path: string, data: any): any {
+	public post(path: string, data: any): any {
 		return this.request(path, 'post', data);
 	}
 
-	request(path: string, method: string,  data: any): any {
+	private request(path: string, method: string,  data: any): any {
 
 		let url: string = String(environment.API_URL);
 		if (path && path !== null) {

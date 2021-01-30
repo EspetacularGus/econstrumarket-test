@@ -10,7 +10,7 @@ export class ClimateProvider {
 		private http: HttpService,
 	) { }
 
-	getClimateInfo() {
+	public getClimateInfo() {
 		return new Promise((resolve, reject) => {
 			this.http.get('weather?woeid=455827&format=json-cors')
 			.then(res => {
